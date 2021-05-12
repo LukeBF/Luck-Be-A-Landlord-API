@@ -2,10 +2,10 @@
 const express = require('express')
 //Create the router object
 const router = express.Router()
-
 //Import service
 const gameItemService = require("../services/GameItemService.js")
-
+//Import validation middleware
+const validateMiddleware = require("../middleware/Validate.js")
 
 //ROUTE 1-View a list of game items
 router.get("/",gameItemService.viewGameItems);
@@ -14,7 +14,7 @@ router.get("/",gameItemService.viewGameItems);
 router.get("/:item_name",gameItemService.viewSingleItem);
 
 //ROUTE 3-Add a new item
-router.post("/",gameItemService.createItem);
+router.post("/",validateMiddleware.validateItems,gameItemService.createItem);
     
 
 // Export the "router" variable 
