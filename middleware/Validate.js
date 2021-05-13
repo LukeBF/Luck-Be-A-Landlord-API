@@ -3,13 +3,14 @@ exports.validateItems = (req,res,next)=>{
 
     const errors = [];
     const rarity = ["common","uncommon","rare","very rare"]
+    const rarityValue = req.body.rarity;
 
     if(req.body.name == "")
     {
         errors.push("You must enter a name")
     }
 
-    if(req.body.rarity !== rarity.includes("common","uncommon","rare","very rare"))
+    if(!rarity.includes(rarityValue))
     {
         errors.push("You can only enter a rarity of common, uncommon, rare or very rare")
     }

@@ -7,6 +7,9 @@ const express = require("express");
  */
 const gameItemController = require("./controllers/GameItemsController.js")
 
+//Import mongoose dependecy
+const mongoose = require("mongoose");
+
 // Create an express app object
 const app = express();
 
@@ -26,4 +29,14 @@ app.use("/items",gameItemController);
 const PORT = 3000;
 app.listen(PORT,()=>{
     console.log(`The server is LIVE on PORT ${PORT}`)
+
+    //Code from mongoose to connect to the API
+    //Returns a promise
+    mongoose.connect('mongodb+srv://admin:Skyw@lker2105@cluster0.zaemf.mongodb.net/luck-be-a-landlord?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(()=>{
+        console.log("The API is connected to MongoDB")
+    })
+    .catch((err)=>{
+        console.log(`${err}`)
+    })
 })

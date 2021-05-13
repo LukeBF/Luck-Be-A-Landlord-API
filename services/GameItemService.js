@@ -1,11 +1,24 @@
 //Import model
-const gameItemModel = require("../model/GameItemModel.js")
+const itemModel = require("../model/GameItemModel.js");
 
 exports.viewGameItems = (req,res)=>{
-    res.json({
-        message: "A list of items in the game",
-        data: gameItemModel.viewAllItems(),
-        total: gameItemModel.viewAllItems().length
+    
+        itemModel.find() //.find() returns a promise (asynchronous code)
+
+        .then((items)=>{
+            res.json({
+                message: "A list of items in the game",
+                data:items,
+                total:items.length
+        })
+        .catch((err)=>{
+            
+            res.status(500).json({
+                message:`Error ${err}`
+            })
+        })
+
+        
     })
 };
 
@@ -32,10 +45,24 @@ exports.viewSingleItem = (req,res)=>{
 
 exports.createItem = (req,res)=>{
     
-    gameItemModel.createItem(req.body)
+    const createdItem = req.body;
+    
+    //Add a new item into the database
+    const newItem = new itemModel(createdItem);
 
-    res.json({
-        message: "The item was added successfully",
-        data: req.body
+    newItem.save() //Returns a promise
+ 
+    .then((item)=>{
+        res.json({
+            message:"The item was created",
+            data:item
+        })
     })
+    .catch((err)=>{
+        
+        res.status(500).json({
+            message: `Error ${err}`
+        })
+    })
+    
 };
