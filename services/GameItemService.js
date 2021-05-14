@@ -3,6 +3,7 @@ const itemModel = require("../model/GameItemModel.js");
 
 exports.viewGameItems = (req,res)=>{
     
+        //Get an array of documents
         itemModel.find() //.find() returns a promise (asynchronous code)
 
         .then((items)=>{
@@ -10,16 +11,16 @@ exports.viewGameItems = (req,res)=>{
                 message: "A list of items in the game",
                 data:items,
                 total:items.length
+            })
+
         })
         .catch((err)=>{
-            
+        
             res.status(500).json({
-                message:`Error ${err}`
+                message: `Error ${err}`
             })
         })
 
-        
-    })
 };
 
 exports.viewSingleItem = (req,res)=>{
@@ -65,4 +66,12 @@ exports.createItem = (req,res)=>{
         })
     })
     
+};
+
+exports.updateItem = (req,res)=>{
+
+};
+
+exports.deleteItem = (req,res)=>{
+
 };

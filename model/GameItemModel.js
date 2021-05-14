@@ -83,6 +83,11 @@ const itemSchema = new Schema({
         type:String,
         required:true
     },
+    imagePath:
+    {
+        type:String,
+        default:"default.jpg"
+    },
     rarity:
     {
         type:String,

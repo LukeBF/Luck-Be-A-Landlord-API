@@ -10,6 +10,9 @@ const gameItemController = require("./controllers/GameItemsController.js")
 //Import mongoose dependecy
 const mongoose = require("mongoose");
 
+//Import dotenv environment variable
+require('dotenv').config({path:"config/Keys.env"});
+
 // Create an express app object
 const app = express();
 
@@ -26,13 +29,13 @@ app.use("/items",gameItemController);
  * Create the web server that listens on a specific port from the "app" variable
  * created above
  */
-const PORT = 3000;
-app.listen(PORT,()=>{
-    console.log(`The server is LIVE on PORT ${PORT}`)
+//const PORT = 3000;
+app.listen(process.env.PORT,()=>{
+    console.log(`The server is LIVE on PORT ${process.env.PORT}`)
 
     //Code from mongoose to connect to the API
-    //Returns a promise
-    mongoose.connect('mongodb+srv://admin:Skyw@lker2105@cluster0.zaemf.mongodb.net/luck-be-a-landlord?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+    //Returns a promise - async operation
+    mongoose.connect(`${process.env.MONGO_DB_CONN_STRING}`, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(()=>{
         console.log("The API is connected to MongoDB")
     })
