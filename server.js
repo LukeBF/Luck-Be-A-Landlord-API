@@ -2,6 +2,9 @@
 // Import Express and assign to a variable
 const express = require("express");
 
+//Import cors
+const cors = require("cors");
+
 /**
  * Import the routers from *Controller.js and map to the app object
  */
@@ -21,6 +24,11 @@ const app = express();
 
 //Create instruction to tell Express how to parse incoming JSON data from the client
 app.use(express.json());
+
+//Call cors
+app.use(cors({
+    origin:"http://127.0.0.1:5500"
+}));
 
 /**
  * Map the routers to the app object 
