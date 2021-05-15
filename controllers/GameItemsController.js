@@ -10,6 +10,7 @@ const { updateOne } = require('../model/GameItemModel.js');
 
 //ROUTE 1-View a list of game items
 router.get("/",gameItemService.viewGameItems);
+//router.get("/",gameItemService,viewFilteredItems);
 
 //ROUTE 2-View an item by rarity
 router.get("/:item_name",gameItemService.viewSingleItem);

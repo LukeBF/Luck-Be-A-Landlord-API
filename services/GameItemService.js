@@ -1,9 +1,53 @@
 //Import model
 const itemModel = require("../model/GameItemModel.js");
 
+// exports.viewGameItems = (req,res)=>{
+
+//         //Get an array of documents
+//         itemModel.find() //.find() returns a promise (asynchronous code)
+
+//         .then((items)=>{
+//             res.json({
+//                 message: "A list of items in the game",
+//                 data:items,
+//                 total:items.length
+//             })
+
+//         })
+//         .catch((err)=>{
+        
+//             res.status(500).json({
+//                 message: `Error occured ${err}`
+//             })
+//         })
+
+// };
+
 exports.viewGameItems = (req,res)=>{
 
+    if(req.query.rarity)
+    {
         //Get an array of documents
+        itemModel.find({rarity:req.query.rarity}) //.find() returns a promise (asynchronous code)
+
+        .then((items)=>{
+            res.json({
+                message: `List of items by type: ${req.query.rarity}`,
+                data:items,
+                total:items.length
+            })
+
+        })
+        .catch((err)=>{
+    
+            res.status(500).json({
+                message: `Error occured ${err}`
+            })
+        })
+
+    }
+    else
+    {
         itemModel.find() //.find() returns a promise (asynchronous code)
 
         .then((items)=>{
@@ -20,7 +64,8 @@ exports.viewGameItems = (req,res)=>{
                 message: `Error occured ${err}`
             })
         })
-
+    }
+    
 };
 
 exports.viewSingleItem = (req,res)=>{
