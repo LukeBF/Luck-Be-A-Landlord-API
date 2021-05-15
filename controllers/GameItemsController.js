@@ -19,7 +19,9 @@ router.post("/",validateMiddleware.validateItems,gameItemService.createItem);
 
 //Route 4-Update an item
 router.put("/:item_name",gameItemService.updateItem)
+
 //Route 5-Delete an item
-router.delete("/:delete",gameItemService.deleteItem)
+router.delete("/:item_name",gameItemService.deleteItem)
+
 // Export the "router" variable 
 module.exports=router;
