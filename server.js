@@ -10,8 +10,11 @@ const gameItemController = require("./controllers/GameItemsController.js")
 //Import mongoose dependecy
 const mongoose = require("mongoose");
 
-//Import dotenv environment variable
-require('dotenv').config({path:"config/Keys.env"});
+if(process.env.NODE_ENV!="production")
+{
+    //Import dotenv environment variable
+    require('dotenv').config({path:"config/Keys.env"});
+}
 
 // Create an express app object
 const app = express();
